@@ -13,7 +13,7 @@ import { UpdateNotice } from "@/components/update-notice";
 type Option={id:string;label:string};
 type Group="category"|"topic"|"creator"|"collection";
 type Selected=Record<Group,Option[]>;
-type Reel={id:string;revision:number;creator:string|null;source_url:string;cover_url:string|null;saved_at:string;categories:Option[];topics:Option[];category_ids:string[];topic_ids:string[];outcome:string;removed:boolean};
+type Reel={id:string;revision:number;creator:string|null;source_url:string;cover_url:string|null;saved_at:string;categories:Option[];topics:Option[];category_ids:string[];topic_ids:string[];outcome:string;removed:boolean;caption?:string|null;transcription?:string|null;video_inspection?:string|null;semantic_description?:string|null};
 const blank:Selected={category:[],topic:[],creator:[],collection:[]};
 const labels:Record<Group,string>={category:"Categoria",topic:"Tópico",creator:"Criador",collection:"Coleção"};
 const plural:Record<Group,string>={category:"Categorias",topic:"Tópicos",creator:"Criadores",collection:"Coleções"};

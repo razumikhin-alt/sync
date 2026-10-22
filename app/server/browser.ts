@@ -4,12 +4,17 @@ import { AppError, canonical, normalize, readBody, sha256 } from "./validation";
 
 export function publicReference(row: any, taxonomy: any) {
   const classification = JSON.parse(row.classification);
+  const analysis = row.analysis ? (typeof row.analysis === "string" ? JSON.parse(row.analysis) : row.analysis) : null;
   return { id:row.id, revision:row.revision, source_url:row.source_url, creator:row.creator,
     saved_at:row.saved_at??row.discovered_at, category_ids:classification.category_ids, topic_ids:classification.topic_ids,
     categories:taxonomy.categories.filter((t:any)=>classification.category_ids.includes(t.id)),
     topics:taxonomy.topics.filter((t:any)=>classification.topic_ids.includes(t.id)),
     collection_ids:JSON.parse(row.collections), outcome:row.outcome, removed:!!row.removed,
-    cover_url:row.cover_key?`/api/covers/${row.id}?v=${row.revision}`:null };
+    cover_url:row.cover_key?`/api/covers/${row.id}?v=${row.revision}`:null,
+    caption: analysis?.caption ?? null,
+    transcription: analysis?.transcription_pt ?? analysis?.transcription ?? (analysis?.transcript ? analysis.transcript.map((s:any)=>s.text).join(" ") : null),
+    video_inspection: analysis?.video_inspection ?? (analysis?.observations ? analysis.observations.map((s:any)=>s.fact).join(" ") : null),
+    semantic_description: analysis?.semantic_description ?? analysis?.description ?? null };
 }
 
 export async function session(headers: Headers) {
@@ -56,7 +61,7 @@ export async function search(body: any, headers: Headers) {
   }
   const where=clauses.join(" AND ");
   const count=await database().prepare(`SELECT count(*) AS count FROM "references" WHERE ${where}`).bind(...args).first<any>();
-  const columns="id,revision,source_url,creator,saved_at,discovered_at,classification,collections,outcome,removed,cover_key";
+  const columns="id,revision,source_url,creator,saved_at,discovered_at,classification,collections,outcome,removed,cover_key,analysis";
   const rank=words.length && body.order==="best" ? "(SELECT sum(CASE WHEN instr(lower(coalesce(creator,'')),value)>0 THEN 5 ELSE 1 END) FROM json_each(?))" : "0";
   const rankArgs=words.length && body.order==="best"?[JSON.stringify(words)]:[];
   const records=await all(`SELECT ${columns},(${rank}) AS rank FROM "references" WHERE ${where} ORDER BY rank DESC,coalesce(saved_at,discovered_at) DESC,id LIMIT 51 OFFSET ?`,[...rankArgs,...args,offset]);
