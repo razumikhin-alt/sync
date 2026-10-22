@@ -57,7 +57,6 @@
 4b4daf422389d09cc1c1c8a64aa4ecdd03dc05ba9af8b12aa8f06dcce559c8ce  app/server/mcp-request.ts
 4be752605b782be9700f44a0c0da1a4bdc6b4a6688672488013121e30bb0a4c0  app/server/release.json
 52eaf509eb284a049f61fee83c8f34f7164557e33556cce1eb1696a6c076dedb  app/drizzle/meta/0002_snapshot.json
-539b8eff936dcf0cb92eeecd475bfe28b068121f71631abd0a614b9c7707d6e4  app/next-env.d.ts
 53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68  app/lib/utils.ts
 57224ad185a25115a14fccc68d3217e55b199260c3dd98a2c807beffec1a0a9b  app/scripts/connector-preview/connector-preview-session.mjs
 58a846bf1617b94b9681921db9b8461d0145f311424663d11678a06b6153cb34  app/components/ui/avatar.tsx
@@ -102,7 +101,6 @@
 9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185  app/components/ui/message.tsx
 9d9f892a1082b67062a15bc6987f9b0b8c39949de40770aac53cf74817b319ee  app/app/api/references/route.ts
 9e44ab6864133a5c82f834a5904ebb7d6104cb783c24efba3c0fe1a161182cea  app/scripts/connector-preview/host-binding.mjs
-a06d03a51065d421a206d98a2a494cf290ff21b0cb112775d6a39950b014403c  app/app/api/covers/[id]/route.ts
 a0784eb77831a799fad7991df4f1b666f876201565a80175e1aa68733574a2e4  app/components/ui/tooltip.tsx
 a0cc80f0d6ba6e829dccf72ee34b5fde1c657379b576a752f252643c00710de5  app/tests/discovery.test.mjs
 a22619faad56100ceee1e7477b021171070f01624bcc778aa3104194d4334efe  app/runtime/transcribe.py
